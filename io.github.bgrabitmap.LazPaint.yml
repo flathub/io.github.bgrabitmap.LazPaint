@@ -25,30 +25,18 @@ modules:
   - name: LazPaint
     sources:
       - type: git
-        url: https://github.com/bgrabitmap/bgrabitmap.git
-        commit: f9748a37f5382b18d1cd197293d1032a522e8561
-        dest: 'bgrabitmap'
-      - type: git
-        url: https://github.com/bgrabitmap/bgracontrols.git
-        commit: f5efbf8b79d0725d33b88c5bd41857d9139428bd
-        dest: 'bgracontrols'
-      - type: git
         url: https://github.com/bgrabitmap/lazpaint.git
-        commit: 501d44c511fb49ca166dc0ec101305dddbf3aee6
+        commit: a11930b418c7d9050886bd7d321fe78acfcd7ea6
       - type: file
         path: io.github.bgrabitmap.LazPaint.metainfo.xml
-      - type: patch
-        path: 0001-515-runtime-fix-for-Qt.patch
-      - type: patch
-        path: 0001-avoid-crash-on-Qt5.patch
       - type: patch
         path: no-image-browser-by-default.patch
     buildsystem: simple
     build-commands:
       - |
         . /usr/lib/sdk/freepascal/enable.sh
-        lazbuild --build-mode=Release --ws=qt5 bgrabitmap/bgrabitmap/bgrabitmappack.lpk
-        lazbuild --build-mode=Release --ws=qt5 bgracontrols/bgracontrols.lpk
+        lazbuild --build-mode=Release --ws=qt5 use/bgrabitmap/bgrabitmap/bgrabitmappack.lpk
+        lazbuild --build-mode=Release --ws=qt5 use/bgracontrols/bgracontrols.lpk
         lazbuild --build-mode=Release --ws=qt5 lazpaintcontrols/lazpaintcontrols.lpk
         lazbuild --build-mode=Release --ws=qt5 lazpaint/lazpaint.lpi
       - install -Dm755 lazpaint/release/bin/lazpaint -t $FLATPAK_DEST/bin
