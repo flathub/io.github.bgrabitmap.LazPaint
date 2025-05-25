@@ -25,8 +25,19 @@ modules:
   - name: LazPaint
     sources:
       - type: git
+        url: https://github.com/bgrabitmap/bgrabitmap.git
+        commit: 6ada359c45fe2230b8af6e108bd6c660bf9202ec
+        dest: 'bgrabitmap'
+        disable-submodules: true
+      - type: git
+        url: https://github.com/bgrabitmap/bgracontrols.git
+        commit: 20dbed8ca89620721dc3028c221c91609db53fe2
+        dest: 'bgracontrols'
+        disable-submodules: true
+      - type: git
         url: https://github.com/bgrabitmap/lazpaint.git
         commit: a11930b418c7d9050886bd7d321fe78acfcd7ea6
+        disable-submodules: true
       - type: file
         path: io.github.bgrabitmap.LazPaint.metainfo.xml
       - type: patch
@@ -35,8 +46,8 @@ modules:
     build-commands:
       - |
         . /usr/lib/sdk/freepascal/enable.sh
-        lazbuild --build-mode=Release --ws=qt5 use/bgrabitmap/bgrabitmap/bgrabitmappack.lpk
-        lazbuild --build-mode=Release --ws=qt5 use/bgracontrols/bgracontrols.lpk
+        lazbuild --build-mode=Release --ws=qt5 bgrabitmap/bgrabitmap/bgrabitmappack.lpk
+        lazbuild --build-mode=Release --ws=qt5 bgracontrols/bgracontrols.lpk
         lazbuild --build-mode=Release --ws=qt5 lazpaintcontrols/lazpaintcontrols.lpk
         lazbuild --build-mode=Release --ws=qt5 lazpaint/lazpaint.lpi
       - install -Dm755 lazpaint/release/bin/lazpaint -t $FLATPAK_DEST/bin
